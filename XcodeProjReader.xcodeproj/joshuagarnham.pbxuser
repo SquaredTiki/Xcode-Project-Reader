@@ -1,0 +1,213 @@
+// !$*UTF8*$!
+{
+	256AC3D80F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 533}}";
+			sepNavSelRange = "{618, 0}";
+			sepNavVisRange = "{0, 863}";
+		};
+	};
+	256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1219, 6682}}";
+			sepNavSelRange = "{16025, 0}";
+			sepNavVisRange = "{16177, 590}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = AFEDC8581376883700206226 /* XcodeProjReader */;
+		activeTarget = 8D1107260486CEB800E47090 /* XcodeProjReader */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* XcodeProjReader */,
+		);
+		breakpoints = (
+			AF7100F0137A640D00969270 /* XcodeProjReaderAppDelegate.m:155 */,
+			AF7100F2137A640F00969270 /* XcodeProjReaderAppDelegate.m:173 */,
+			AF7100F4137A641100969270 /* XcodeProjReaderAppDelegate.m:186 */,
+		);
+		codeSenseManager = AFEDC8661376884500206226 /* Code sense */;
+		executables = (
+			AFEDC8581376883700206226 /* XcodeProjReader */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					10,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 326651673;
+			PBXWorkspaceStateSaveDate = 326651673;
+		};
+		perUserProjectItems = {
+			AF7102B8137AFAC400969270 /* PBXTextBookmark */ = AF7102B8137AFAC400969270 /* PBXTextBookmark */;
+			AF7102FF137B070400969270 /* PBXTextBookmark */ = AF7102FF137B070400969270 /* PBXTextBookmark */;
+			AF710305137B0F0500969270 /* PBXTextBookmark */ = AF710305137B0F0500969270 /* PBXTextBookmark */;
+			AF71FDC81378480B00969270 /* PBXBookmark */ = AF71FDC81378480B00969270 /* PBXBookmark */;
+		};
+		sourceControlManager = AFEDC8651376884500206226 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D1107260486CEB800E47090 /* XcodeProjReader */ = {
+		activeExec = 0;
+		executables = (
+			AFEDC8581376883700206226 /* XcodeProjReader */,
+		);
+	};
+	AF7100F0137A640D00969270 /* XcodeProjReaderAppDelegate.m:155 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */;
+		functionName = "-addChildrenTo:withString:andCurrentRange:";
+		hitCount = 1;
+		ignoreCount = 0;
+		lineNumber = 155;
+		location = XcodeProjReader;
+		modificationTime = 326788133.301301;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	AF7100F2137A640F00969270 /* XcodeProjReaderAppDelegate.m:173 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */;
+		functionName = "-addChildrenTo:withString:andCurrentRange:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 173;
+		location = XcodeProjReader;
+		modificationTime = 326788128.166398;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	AF7100F4137A641100969270 /* XcodeProjReaderAppDelegate.m:186 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */;
+		functionName = "-addChildrenTo:withString:andCurrentRange:";
+		hitCount = 1;
+		ignoreCount = 0;
+		lineNumber = 186;
+		location = XcodeProjReader;
+		modificationTime = 326788148.498491;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	AF7102B8137AFAC400969270 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D80F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.h */;
+		name = "XcodeProjReaderAppDelegate.h: 27";
+		rLen = 0;
+		rLoc = 618;
+		rType = 0;
+		vrLen = 863;
+		vrLoc = 0;
+	};
+	AF7102FF137B070400969270 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */;
+		rLen = 1;
+		rLoc = 370;
+		rType = 1;
+	};
+	AF710305137B0F0500969270 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */;
+		name = "XcodeProjReaderAppDelegate.m: 377";
+		rLen = 0;
+		rLoc = 16025;
+		rType = 0;
+		vrLen = 1756;
+		vrLoc = 15123;
+	};
+	AF71FDC6137847AA00969270 /* ToolbarOpenTemplate.png */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = image.png;
+		name = ToolbarOpenTemplate.png;
+		path = /Users/joshuagarnham/Desktop/Transmission/macosx/Images/ToolbarOpenTemplate.png;
+		sourceTree = "<absolute>";
+	};
+	AF71FDC81378480B00969270 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = AF71FDC6137847AA00969270 /* ToolbarOpenTemplate.png */;
+	};
+	AFEDC8581376883700206226 /* XcodeProjReader */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = XcodeProjReader;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	AFEDC8651376884500206226 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	AFEDC8661376884500206226 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+}
