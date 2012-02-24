@@ -20,3 +20,7 @@ This projects reads and displays an Xcode Projects file structure in an `NSOutli
 - Add some decent comments so people know what's what
 - Add support for adding frameworks (not just to the file list but also to the build phases)
 - *Various other things which I can't think of right now*
+
+## Attribution
+
+If you are using `XCDProjectCoordinator` in your project please make sure you leave credit where credit is due.
