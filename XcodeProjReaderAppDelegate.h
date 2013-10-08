@@ -1,36 +1,29 @@
-//
-//  XcodeProjReaderAppDelegate.h
-//  XcodeProjReader
-//
-//  Created by Joshua Garnham on 08/05/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+
+//  XcodeProjReaderAppDelegate.h * XcodeProjReader
+//  Created by Joshua Garnham on 08/05/2011. Edited by Alex Gray on 10/7/13
 
 #import <Cocoa/Cocoa.h>
-#import "XCDProjectCoordinator.h"
 
-@interface XcodeProjReaderAppDelegate : NSObject <NSApplicationDelegate> {
-    NSWindow *window;
-    
-    NSString *filePath;
+@class XcodeObject;
+@interface ColorTableRowView : NSTableRowView
+@property (readonly) XcodeObject *x;
+@end
 
-	IBOutlet NSOutlineView *outlineView;
-	IBOutlet NSButton *browseButton;
-	IBOutlet NSButton *parseButton;
-	IBOutlet NSTextField *projLocField;
-	
-	IBOutlet NSTextField *newItemTitleField;
-    IBOutlet NSTextField *newGroupTitleField;
-    
-    XCDProjectCoordinator *projectCoordinator;
-}
+@class XCDProjectCoordinator;
+@interface XcodeProjReaderAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSWindow 			*window;
+@property (weak) 	 IBOutlet NSOutlineView 	*outlineView;
+@property (weak)   IBOutlet NSButton 			*parseButton;
+@property (weak)   IBOutlet NSSegmentedControl 	*actions;
+@property (weak)   IBOutlet NSPathControl 	*projLocField;
+@property (weak)   IBOutlet NSTextField 		*titleField;
 
-- (IBAction)parseCurrentlyLocatedXcodeProject:(id)sender;
-- (IBAction)browseForXcodeProject:(id)sender;
-- (IBAction)remove:(id)sender;
-- (IBAction)add:(id)sender;
-- (IBAction)addGroup:(id)sender;
+@property NSMutableArray *expandedItems;
+@property XCDProjectCoordinator *projectCoordinator;
+
+- (IBAction) parseCurrentlyLocatedXcodeProject:	(id)sender;
+- (IBAction) browseForXcodeProject:					(id)sender;
+- (IBAction) segmentAction:							(id)sender;
 
 @end
