@@ -10,7 +10,9 @@
 @end
 
 @class XCDProjectCoordinator;
-@interface XcodeProjReaderAppDelegate : NSObject <NSApplicationDelegate>
+@interface XcodeProjReaderAppDelegate : NSObject <NSApplicationDelegate> {
+    BOOL _initialized;
+}
 
 @property (assign) IBOutlet NSWindow 			*window;
 @property (weak) 	 IBOutlet NSOutlineView 	*outlineView;

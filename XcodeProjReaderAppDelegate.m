@@ -46,9 +46,12 @@ int main(int argc, char *argv[])	{   return NSApplicationMain(argc, (const char*
 
 - (void) awakeFromNib
 {
-	[_projLocField addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:0];
-	self.projLocField.URL = [NSURL URLWithString:[NSString stringWithFormat:
-			@"%s/TestProject/TestProject.xcodeproj", getenv("PROJECT_FOLDER")]];
+    if (!_initialized) {
+        [_projLocField addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:0];
+        self.projLocField.URL = [NSURL URLWithString:[NSString stringWithFormat:
+                                                      @"%s/TestProject/TestProject.xcodeproj", getenv("PROJECT_FOLDER")]];
+        _initialized = YES;
+    }
 }
 - (void) observeValueForKeyPath:(NSString *)kP ofObject:(id)o change:(NSDictionary *)chg context:(void *)ctx
 {
@@ -60,8 +63,8 @@ int main(int argc, char *argv[])	{   return NSApplicationMain(argc, (const char*
  	 p.allowedFileTypes				= @[@"xcodeproj"];
 	[p beginSheetModalForWindow:_window completionHandler:^(NSInteger result) {
 
-		if (result == NSOKButton && NSOpenPanel.openPanel.URLs.count)
-			_projLocField.URL = NSOpenPanel.openPanel.URLs[0];
+		if (result == NSOKButton && p.URLs.count)
+			_projLocField.URL = p.URLs[0];
 	}];
 }
 - (IBAction)parseCurrentlyLocatedXcodeProject:(id)sender
@@ -106,7 +109,8 @@ int main(int argc, char *argv[])	{   return NSApplicationMain(argc, (const char*
 - (void)outlineViewSelectionDidChange:(NSNotification *)note {
 
 	id x, z; if ((x = self.selection)) [_actions setEnabled:YES forSegment:0]; else return;
-	BOOL canAdd = ((z = x[@"parent"])); 	NSLog(@"Parent: %@", z);
+	BOOL canAdd = ((NSArray *)x[@"children"]).count != 0;
+    NSLog(@"Parent: %@", z);
 	[_actions setEnabled:canAdd forSegment:1];
 	[_actions setEnabled:canAdd forSegment:2];
 }
