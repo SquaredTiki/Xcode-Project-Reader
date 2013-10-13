@@ -9,23 +9,32 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		7B9C624718035A2200EE5E3E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9C624618035A2200EE5E3E /* Cocoa.framework */; };
+		7B9C625018039C5800EE5E3E /* lib.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C624B18039C5800EE5E3E /* lib.tiff */; };
+		7B9C625118039C5800EE5E3E /* app.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C624C18039C5800EE5E3E /* app.icns */; };
+		7B9C625218039C5800EE5E3E /* framework.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C624D18039C5800EE5E3E /* framework.icns */; };
+		7B9C625318039C5800EE5E3E /* group.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C624E18039C5800EE5E3E /* group.icns */; };
+		7B9C625418039C5800EE5E3E /* project.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C624F18039C5800EE5E3E /* project.icns */; };
+		7B9C62561803E70C00EE5E3E /* header.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C62551803E70C00EE5E3E /* header.pdf */; };
+		7B9C62581803F83500EE5E3E /* source.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C62571803F83500EE5E3E /* source.pdf */; };
+		7B9C625B1803FBB400EE5E3E /* XcodeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C625A1803FBB400EE5E3E /* XcodeObject.m */; };
 		AFFA3CDA13AFA022004ACA18 /* XCDProjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFA3CD913AFA022004ACA18 /* XCDProjectCoordinator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeProjReaderAppDelegate.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeProjReaderAppDelegate.m; sourceTree = "<group>"; };
-		256AC3F00F4B6AF500CF3369 /* XcodeProjReader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeProjReader_Prefix.pch; sourceTree = "<group>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		7B9C624618035A2200EE5E3E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		7B9C624B18039C5800EE5E3E /* lib.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = lib.tiff; sourceTree = "<group>"; };
+		7B9C624C18039C5800EE5E3E /* app.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = app.icns; sourceTree = "<group>"; };
+		7B9C624D18039C5800EE5E3E /* framework.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = framework.icns; sourceTree = "<group>"; };
+		7B9C624E18039C5800EE5E3E /* group.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = group.icns; sourceTree = "<group>"; };
+		7B9C624F18039C5800EE5E3E /* project.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = project.icns; sourceTree = "<group>"; };
+		7B9C62551803E70C00EE5E3E /* header.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = header.pdf; sourceTree = "<group>"; };
+		7B9C62571803F83500EE5E3E /* source.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = source.pdf; sourceTree = "<group>"; };
+		7B9C62591803FBB400EE5E3E /* XcodeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeObject.h; sourceTree = "<group>"; };
+		7B9C625A1803FBB400EE5E3E /* XcodeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcodeObject.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* XcodeProjReader-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "XcodeProjReader-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* XcodeProjReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XcodeProjReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFA3CD813AFA022004ACA18 /* XCDProjectCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCDProjectCoordinator.h; sourceTree = "<group>"; };
@@ -37,42 +46,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				7B9C624718035A2200EE5E3E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				AFFA3CD813AFA022004ACA18 /* XCDProjectCoordinator.h */,
-				AFFA3CD913AFA022004ACA18 /* XCDProjectCoordinator.m */,
-				256AC3D80F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.h */,
-				256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,41 +64,33 @@
 		29B97314FDCFA39411CA2CEA /* XcodeProjReader */ = {
 			isa = PBXGroup;
 			children = (
-				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				7B9C62591803FBB400EE5E3E /* XcodeObject.h */,
+				7B9C625A1803FBB400EE5E3E /* XcodeObject.m */,
+				AFFA3CD813AFA022004ACA18 /* XCDProjectCoordinator.h */,
+				AFFA3CD913AFA022004ACA18 /* XCDProjectCoordinator.m */,
+				256AC3D80F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.h */,
+				256AC3D90F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				8D1107310486CEB800E47090 /* XcodeProjReader-Info.plist */,
+				7B9C624618035A2200EE5E3E /* Cocoa.framework */,
+				7B9C624A18039C5800EE5E3E /* Icons */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = XcodeProjReader;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+		7B9C624A18039C5800EE5E3E /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				256AC3F00F4B6AF500CF3369 /* XcodeProjReader_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
+				7B9C62571803F83500EE5E3E /* source.pdf */,
+				7B9C62551803E70C00EE5E3E /* header.pdf */,
+				7B9C624B18039C5800EE5E3E /* lib.tiff */,
+				7B9C624C18039C5800EE5E3E /* app.icns */,
+				7B9C624D18039C5800EE5E3E /* framework.icns */,
+				7B9C624E18039C5800EE5E3E /* group.icns */,
+				7B9C624F18039C5800EE5E3E /* project.icns */,
 			);
-			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		29B97317FDCFA39411CA2CEA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				8D1107310486CEB800E47090 /* XcodeProjReader-Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
-			);
-			name = Frameworks;
+			path = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +119,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "XcodeProjReader" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -171,7 +145,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				7B9C625118039C5800EE5E3E /* app.icns in Resources */,
+				7B9C625418039C5800EE5E3E /* project.icns in Resources */,
+				7B9C625018039C5800EE5E3E /* lib.tiff in Resources */,
+				7B9C62581803F83500EE5E3E /* source.pdf in Resources */,
+				7B9C625318039C5800EE5E3E /* group.icns in Resources */,
+				7B9C62561803E70C00EE5E3E /* header.pdf in Resources */,
+				7B9C625218039C5800EE5E3E /* framework.icns in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				7B9C625B1803FBB400EE5E3E /* XcodeObject.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* XcodeProjReaderAppDelegate.m in Sources */,
 				AFFA3CDA13AFA022004ACA18 /* XCDProjectCoordinator.m in Sources */,
 			);
@@ -192,14 +172,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -214,63 +186,75 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = XcodeProjReader_Prefix.pch;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "XcodeProjReader-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = XcodeProjReader;
-				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = XcodeProjReader_Prefix.pch;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "XcodeProjReader-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = XcodeProjReader;
-				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_MODULES_AUTOLINK = NO;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					AppKit,
+					"-framework",
+					QuartzCore,
+				);
 				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_MODULES_AUTOLINK = NO;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"-framework",
+					AppKit,
+					"-framework",
+					QuartzCore,
+				);
 				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
