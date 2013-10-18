@@ -8,45 +8,53 @@
 @interface XCDProjectCoordinator : NSObject
 
 // The root object which has references to the main group, configuration list's and targets
-@property 					 NSDictionary * rootObject;
+@property NSDictionary * rootObject;
  // The main group is the highest group, it has the name of you proj. itself and contains all the subfold, e.g Classes, Other Sources, Resrcs etc.
-@property (weak)			 NSDictionary * mainGroup;
-@property			NSMutableDictionary * sourceData; 	// The original dictionary of the data from the xcode project
-@property				 NSMutableString * dataString; 	// The orgiginal data string of the data from the xcode project
-@property 								 int   waitTime, i; 	// Internal
-@property 								BOOL   isDropbox; 	// Tells the project that it is accessing dropbox
+@property (weak) NSDictionary * mainGroup;
+@property NSMutableDictionary * sourceData; 	// The original dictionary of the data from the xcode project
+@property NSMutableString * dataString; 	// The orgiginal data string of the data from the xcode project
+@property int   waitTime, i; 	// Internal
+@property BOOL   isDropbox; 	// Tells the project that it is accessing dropbox
 
 // An array of nested dictionaries with value of parent, children, name and uuid.
 //	Used generally only in conjunction with NSOutlineView which requires nested dictionaries with a weak reference to the parent object
-@property 				  				NSMutableArray * files;
-@property 				 						NSString * filePath,						// The location of the xcode project
-																* originalDropboxPath;
-@property (weak) 	 							NSString * rootObjectUUID,				// The UUID of the root object
-																* mainGroupUUID;				// The UUID of the main group
-@property (nonatomic,unsafe_unretained) 	   id	  exportDelegate;				// Delegate keeps track when exp. the proj.
+@property NSMutableArray * files;
+@property NSString * filePath;					// The location of the xcode project
+@property NSString * originalDropboxPath;
+@property (weak) NSString * rootObjectUUID;			// The UUID of the root object
+@property (weak) NSString * mainGroupUUID;				// The UUID of the main group
+@property (nonatomic,unsafe_unretained) id exportDelegate;				// Delegate keeps track when exp. the proj.
 
 - (void) parseXcodeProject;
--   (id) initWithProjectAtPath:	(NSString *)path;
-- (void) removeItemWithUUID:	   (NSString*)uuid;
-- (BOOL) addGroupWithTitle:		(NSString*)title 			  toItemWithUUID:(NSString*)parentUUID;
-- (BOOL) addFileWithRelativePath:(NSString*)relPath asChildToItemWithUUID:(NSString*)parentItemUUID;
-- (BOOL) newProjectAtPath:			(NSString*)path 			  withFrameworks:(NSArray*)frameworks 	     sourceFiles:(NSArray*)sourceFiles
-																          supportingFiles:(NSArray*)supportingFiles oniOSVersion:(NSString*)iOSVersion; // iOS only
+- (id) initWithProjectAtPath:(NSString *)path;
 
--      (NSArray*) uuidsOfChildrenOfItemWithUUID: (NSString*)uuid;
--    (NSUInteger) numberOfChildrenOfItemWithUUID:(NSString*)uuid;
-- (XcodeObject*) itemWithUUID:						 (NSString*)uuid;
--     (NSString*) nameOfItemWithUUID:				 (NSString*)uuid;
-- (XcodeObject*) parentOfItemWithUUID:			 (NSString*)uuid;
+- (void) removeItemWithUUID:(NSString*)uuid;
+- (BOOL) addGroupWithTitle:(NSString*)title toItemWithUUID:(NSString*)parentUUID;
+- (BOOL) addFileWithRelativePath:(NSString*)relPath asChildToItemWithUUID:(NSString*)parentItemUUID;
+- (BOOL) newProjectAtPath:(NSString*)path withFrameworks:(NSArray*)frameworks
+              sourceFiles:(NSArray*)sourceFiles
+          supportingFiles:(NSArray*)supportingFiles oniOSVersion:(NSString*)iOSVersion; // iOS only
+
+- (NSArray*) uuidsOfChildrenOfItemWithUUID:(NSString*)uuid;
+- (NSUInteger) numberOfChildrenOfItemWithUUID:(NSString*)uuid;
+- (XcodeObject*) itemWithUUID:(NSString*)uuid;
+
+// Created this because it appears that itemWithUUID is still returning an NSDictionary
+- (NSDictionary*) itemWithUUIDAsNSDictionary:(NSString *)uuid;
+- (NSString*) nameOfItemWithUUID:(NSString*)uuid;
+- (XcodeObject*) parentOfItemWithUUID:(NSString*)uuid;
 
 - (BOOL) exportFilesFromProjectIntoFolderAtPath:(NSString*)destinationPath;
 
 @end
 
-typedef NS_ENUM (NSInteger, XCDBuildPhase) 	{ 	XCDSourceBuildPhase, 		XCDFrameworksBuildPhase };
-typedef NS_ENUM (NSInteger, XCDExportStatus) { 	XCDExportStatusBegun, 		XCDExportStatusPreProcessing,
-																XCDExportStatusProcessing, XCDExportStatusComplete,
-																XCDExportStatusFailure };
+typedef NS_ENUM (NSInteger, XCDBuildPhase) 	{ 	XCDSourceBuildPhase,
+                                                XCDFrameworksBuildPhase };
+typedef NS_ENUM (NSInteger, XCDExportStatus) { 	XCDExportStatusBegun,
+                                                XCDExportStatusPreProcessing,
+												XCDExportStatusProcessing,
+                                                XCDExportStatusComplete,
+                                                XCDExportStatusFailure };
 
 NS_INLINE NSUInteger numberOfOccurrencesOfStringInString (NSString *needle, NSString *haystack) {
 	const char * rawNeedle 	= needle.UTF8String, * rawHaystack = haystack.UTF8String;
