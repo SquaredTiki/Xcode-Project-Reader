@@ -45,7 +45,7 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) {
         NSString *name = elementDictionary[@"name"]; // IF HAS NAME IT IS GROUP! OTHERWISE IS FILE AND USE PATH
         NSString *path = [elementDictionary[@"path"]lastPathComponent];
 
-        NSLog(@"--- Name: %@ Path: %@",name,path);
+        //NSLog(@"--- Name: %@ Path: %@",name,path);
         
         NSMutableString *gapping = @"".mutableCopy;
         for (int x=0; x < _i; x++) {
