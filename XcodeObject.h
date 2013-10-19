@@ -7,17 +7,18 @@
 @interface XcodeObject : NSObject <NSMutableCopying>
 
 + (instancetype) objectWithName:(NSString*)n
-									uuid:(NSString*)uuid;
+                           uuid:(NSString*)uuid;
 
-- (void)  	 		   setObject:(id)x
-				 forKeyedSubscript:(id<NSCopying>)k;
+- (void) setObject:(id)x
+ forKeyedSubscript:(id<NSCopying>)k;
+
 - (id) objectForKeyedSubscript:(id)k;
 
-@property (copy) 		NSString * uuid, * name;
+@property (copy) NSString * uuid, * name;
 @property (readonly)  NSImage * icon;
 @property (readonly) NSString * humanUTI;
-@property      NSMutableArray * children;
-@property 						id   parent;
+@property NSMutableArray * children;
+@property id parent;
 
 @end
 

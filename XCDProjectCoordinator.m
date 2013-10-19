@@ -10,12 +10,15 @@ static NSString *lettersAndNumbers, *numbers = nil;
 
 #pragma mark - Additions
 
-NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutableString *randomString = NSMutableString.new;
+NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) {
+    NSMutableString *randomString = NSMutableString.new;
 
 	numbers = numbers	?: @"123456789"; lettersAndNumbers = lettersAndNumbers ?: @"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	for (int x=0; x<len; x++)		[randomString appendFormat:@"%c", alphaNumeric
-										? 	[lettersAndNumbers characterAtIndex:arc4random() % lettersAndNumbers.length]
-										: 	[numbers 			 characterAtIndex:arc4random() % numbers.length]];
+	for (int x=0; x<len; x++) {
+        [randomString appendFormat:@"%c", alphaNumeric
+		? 	[lettersAndNumbers characterAtIndex:arc4random() % lettersAndNumbers.length]
+		: 	[numbers characterAtIndex:arc4random() % numbers.length]];
+    }
 	return randomString;
 }
 
@@ -24,98 +27,120 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 
 #pragma mark - Initiazlization
 
-- (id)initWithProjectAtPath:(NSString *)path { if (self != super.init) return nil; _filePath = path; return self; }
+- (id)initWithProjectAtPath:(NSString *)path {
+    if (self != super.init) return nil;
+    
+    _filePath = path;
+    return self;
+}
 
 #pragma mark - Supporting Methods
 
 - (void) enumerateChildrenWithObjects:(NSArray*)objects andMainData:(NSDictionary*)mainData 								{
+    [objects enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
+    //		NSDictionary *elementDictionary = mainData[element];
+        id elementDictionary = mainData[element];
+        //NSLog(@"elementDictionary.class = %@", NSStringFromClass([elementDictionary class]));
+    //		XcodeObject *elementDictionary = mainData[element];
+        NSString *name = elementDictionary[@"name"]; // IF HAS NAME IT IS GROUP! OTHERWISE IS FILE AND USE PATH
+        NSString *path = [elementDictionary[@"path"]lastPathComponent];
 
-	[objects enumerateObjectsUsingBlock:^(NSString *element, NSUInteger idx, BOOL *stop) {
-
-//		NSDictionary *elementDictionary = mainData[element];
-		id elementDictionary = mainData[element];
-		NSLog(@"elementDictionary.class = %@", NSStringFromClass([elementDictionary class]));
-//		XcodeObject *elementDictionary = mainData[element];
-		NSString *name = elementDictionary[@"name"], // IF HAS NAME IT IS GROUP! OTHERWISE IS FILE AND USE PATH
-		*path = [elementDictionary[@"path"]lastPathComponent];
-
-		NSMutableString *gapping = @"".mutableCopy;
-		for(int x=0; x < _i; x++) { [gapping appendString:@"\t"]; }
-		if (name && [name.pathExtension isEqualToString:@""]) {
-			[_dataString appendString:$(@"%@%@|[GAP]|%@\n", gapping, name, element)];
-			NSArray *children = [elementDictionary valueForKey:@"children"];
-			if (children) {	self.i++;
-				[self enumerateChildrenWithObjects:children andMainData:mainData];
-			}
-		}
-		else if (name)
-			[self.dataString appendString:[NSString stringWithFormat:@"%@%@|[GAP]|%@\n", gapping, name, element]];
-		else if (path && [[path pathExtension] isEqualToString:@""]) {
-			[self.dataString appendString:[NSString stringWithFormat:@"%@%@|[GAP]|%@\n", gapping, path, element]];
-			NSArray *children = [elementDictionary valueForKey:@"children"];
-			if (children) { self.i++;
-				[self enumerateChildrenWithObjects:children andMainData:mainData];
-			}
-		} else if (path)
-			[self.dataString appendString:[NSString stringWithFormat:@"%@%@|[GAP]|%@\n", gapping, path, element]];
-	}];
-	self.i--;
+        //NSLog(@"--- Name: %@ Path: %@",name,path);
+        
+        NSMutableString *gapping = @"".mutableCopy;
+        for (int x=0; x < _i; x++) {
+            [gapping appendString:@"\t"];
+        }
+        
+        if (name && [name.pathExtension isEqualToString:@""]) {
+            [_dataString appendString:$(@"%@%@|[GAP]|%@\n", gapping, name, element)];
+            NSArray *children = [elementDictionary valueForKey:@"children"];
+            if (children) {
+                self.i++;
+                [self enumerateChildrenWithObjects:children andMainData:mainData];
+            }
+        }
+        else if (name) {
+            [self.dataString appendString:[NSString stringWithFormat:@"%@%@|[GAP]|%@\n", gapping, name, element]];
+        }
+        else if (path && [[path pathExtension] isEqualToString:@""]) {
+            [self.dataString appendString:[NSString stringWithFormat:@"%@%@|[GAP]|%@\n", gapping, path, element]];
+            NSArray *children = [elementDictionary valueForKey:@"children"];
+            if (children) { self.i++;
+                [self enumerateChildrenWithObjects:children andMainData:mainData];
+            }
+        } else if (path) {
+            [self.dataString appendString:[NSString stringWithFormat:@"%@%@|[GAP]|%@\n", gapping, path, element]];
+        }
+    }];
+    self.i--;
 }
+
 //- (NSDictionary*)addChildrenTo:(NSDictionary*)dict withString:(NSString*)sString andCurrentRange:(NSRange)cRange 	{
 - (XcodeObject*)addChildrenTo:(XcodeObject*)dict withString:(NSString*)sString andCurrentRange:(NSRange)cRange {
 
-	NSInteger numToSkip 						= 100;
-	NSArray *eachLine 						= [sString componentsSeparatedByString:@"\n"];
-	XcodeObject *newDictionary 	= [dict mutableCopy];
-//NSMutableDictionary *newDictionary 	= [dict mutableCopy];
-	NSRange currentLineRange 				= NSMakeRange(cRange.location, 0);
+	NSInteger numToSkip = 100;
+	NSArray *eachLine = [sString componentsSeparatedByString:@"\n"];
+	XcodeObject *newDictionary = [dict mutableCopy];
+//NSMutableDictionary *newDictionary = [dict mutableCopy];
+	NSRange currentLineRange = NSMakeRange(cRange.location, 0);
 	for (NSString *line in eachLine) {
-		NSInteger newLoc 						= currentLineRange.location + line.length + 1;
-		currentLineRange 						= NSMakeRange(newLoc, 0);
+		NSInteger newLoc = currentLineRange.location + line.length + 1;
+		currentLineRange = NSMakeRange(newLoc, 0);
+        
 		if ([eachLine indexOfObject:line] == eachLine.count-1) break;
-		NSInteger numOfTabs 					= numberOfOccurrencesOfStringInString(@"\t", line);
-		NSString *nextLine 					= eachLine[[eachLine indexOfObject:line]+1];
-		NSInteger numOfTabsOnNextLine 	= numberOfOccurrencesOfStringInString(@"\t", nextLine);
+        
+		NSInteger numOfTabs = numberOfOccurrencesOfStringInString(@"\t", line);
+		NSString *nextLine = eachLine[[eachLine indexOfObject:line]+1];
+		NSInteger numOfTabsOnNextLine = numberOfOccurrencesOfStringInString(@"\t", nextLine);
 		NSMutableArray *children;
 
-		if 		(numOfTabs > numToSkip) 		continue;
-		else if 	(numOfTabs < numToSkip) 		numToSkip = 100;
-		if (self.waitTime > 0) {		self.waitTime--;		return newDictionary; }
+		if  (numOfTabs > numToSkip) {
+            continue;
+        }
+		else if (numOfTabs < numToSkip) {
+            numToSkip = 100;
+        }
+        
+		if (self.waitTime > 0) {
+            self.waitTime--;
+            return newDictionary;
+        }
+        
 		if (numOfTabsOnNextLine > numOfTabs) {
-			NSString *uuid 				= [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
+			NSString *uuid = [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
 													 + [line rangeOfString:@"|[GAP]|"].length] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-			NSString *name 				= [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
+			NSString *name = [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
 													stringByReplacingOccurrencesOfString:@"\t" withString:@""];
 //		NSDictionary *dictionary 	= @{ @"name":name, @"children":@[].mutableCopy,@"uuid":uuid, @"parent":newDictionary, @"icon":
-			NSString *hereOn 				= [self.dataString substringFromIndex:currentLineRange.location];
+			NSString *hereOn = [self.dataString substringFromIndex:currentLineRange.location];
 			XcodeObject *dictionary = [XcodeObject objectWithName:name uuid:uuid];
-//			dictionary 						= [self addChildrenTo:dictionary withString:hereOn andCurrentRange:currentLineRange];
+//			dictionary = [self addChildrenTo:dictionary withString:hereOn andCurrentRange:currentLineRange];
 			dictionary = [self addChildrenTo:dictionary withString:hereOn andCurrentRange:currentLineRange];
-			numToSkip 						= numOfTabs; // Skip anything > the current # of tabs until it comes down
+			numToSkip = numOfTabs; // Skip anything > the current # of tabs until it comes down
 			children = newDictionary[@"children"];
-			NSLog(@"Chlldren:%@", children);
+			//NSLog(@"Chlldren:%@", children);
 			[children addObject:dictionary];
 			newDictionary[@"children"] = children;
-
 		} else if (numOfTabsOnNextLine < numOfTabs) {
-			NSString *name					= [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
-													stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-			NSString *uuid 				= [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
-													 + [line rangeOfString:@"|[GAP]|"].length] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+			NSString *name = [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
+                              stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+			NSString *uuid = [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
+                                + [line rangeOfString:@"|[GAP]|"].length] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
 //			NSDictionary *child 			= @{@"name": name, @"children" : @[].mutableCopy, @"uuid":uuid, @"parent":newDictionary,@"icon"
 			XcodeObject *child = [XcodeObject objectWithName:name uuid:uuid];
 			child.parent = newDictionary;
 			[(children = newDictionary[@"children"]) addObject:child];
 			newDictionary[@"children"] = children;
-			self.waitTime 						= numOfTabs - numOfTabsOnNextLine - 1;
+			self.waitTime = numOfTabs - numOfTabsOnNextLine - 1;
 			return newDictionary;
 		} else {
-			NSString *name 				= [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
-													stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-			NSString *uuid 				= [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
-													 + [line rangeOfString:@"|[GAP]|"].length] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+			NSString *name = [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
+                              stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+			NSString *uuid = [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
+                            + [line rangeOfString:@"|[GAP]|"].length] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
 
-//			NSDictionary *child 			= @{@"name": name, @"children" : @[].mutableCopy, @"uuid":uuid, @"parent":newDictionary, @"icon":
+//			NSDictionary *child = @{@"name": name, @"children" : @[].mutableCopy, @"uuid":uuid, @"parent":newDictionary, @"icon":
 			XcodeObject *child = [XcodeObject objectWithName:name uuid:uuid];
 			child.parent = newDictionary;
 			[(children = newDictionary[@"children"]) addObject:child];
@@ -128,41 +153,43 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 
 #pragma mark - Parsing
 
-- (void)parseIt				{
+- (void)parseIt {
 
-	NSArray *eachLine 		 	= [self.dataString componentsSeparatedByString:@"\n"];
-	NSRange currentLineRange 	= NSMakeRange(0, 0);
+	NSArray *eachLine = [self.dataString componentsSeparatedByString:@"\n"];
+	NSRange currentLineRange = NSMakeRange(0, 0);
 
 	for (NSString *line in eachLine) {
 
-		NSInteger newLoc 	= currentLineRange.location + line.length + 1;
-		currentLineRange 	= NSMakeRange(newLoc, 0);
+		NSInteger newLoc = currentLineRange.location + line.length + 1;
+		currentLineRange = NSMakeRange(newLoc, 0);
 
 		if ([eachLine indexOfObject:line] == eachLine.count-1) break;
 
-		NSInteger numOfTabs 				= numberOfOccurrencesOfStringInString(@"\t", line);
-		NSString *nextLine 				= eachLine[[eachLine indexOfObject:line]+1];
+		NSInteger numOfTabs = numberOfOccurrencesOfStringInString(@"\t", line);
+		NSString *nextLine = eachLine[[eachLine indexOfObject:line]+1];
 		NSInteger numOfTabsOnNextLine = numberOfOccurrencesOfStringInString(@"\t", nextLine);
 
 		if (numOfTabs == 0 && numOfTabsOnNextLine > numOfTabs) {			// Folder, I am
 
-			NSString *name 				= [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
-															stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-			NSString *uuid 				= [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
-											   + [line 	rangeOfString:@"|[GAP]|"].length]
-															stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+			NSString *name = [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
+                                stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+			NSString *uuid = [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
+                            + [line rangeOfString:@"|[GAP]|"].length]
+                                stringByReplacingOccurrencesOfString:@"\t" withString:@""];
 			XcodeObject *obj = [XcodeObject objectWithName:name uuid:uuid];
 //			obj.name = name;
 //			obj.uuid = uuid;
 //			[obj setValue:@[].mutableCopy forKey:@"children"];
-//			NSDictionary *dictionary 	= @{@"name": name, @"children": @[].mutableCopy, @"uuid": uuid, @"parent": NSNull.null, @"icon":[NSImage imageNamed:@"group"] }; [NSWorkspace.sharedWorkspace iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]};
-			NSString *hereOn 				= [self.dataString substringFromIndex:currentLineRange.location];
-			//dictionary 						= [self addChildrenTo:dictionary withString:hereOn andCurrentRange:currentLineRange];
-			obj 	= [self addChildrenTo:obj withString:hereOn andCurrentRange:currentLineRange];
-			[self.files addObject:obj];//dictionary];
+//			NSDictionary *dictionary = @{@"name": name, @"children": @[].mutableCopy, @"uuid": uuid, @"parent": NSNull.null, @"icon":[NSImage imageNamed:@"group"] }; [NSWorkspace.sharedWorkspace iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)]};
+			
+            NSString *hereOn = [self.dataString substringFromIndex:currentLineRange.location];
+			//dictionary = [self addChildrenTo:dictionary withString:hereOn andCurrentRange:currentLineRange];
+			obj = [self addChildrenTo:obj withString:hereOn andCurrentRange:currentLineRange];
+			[self.files addObject:obj];
+            //dictionary];
 		} else if (numOfTabs == 0) {
 			NSString *name = [[line substringToIndex:[line rangeOfString:@"|[GAP]|"].location]
-											stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                            stringByReplacingOccurrencesOfString:@"\t" withString:@""];
 			NSString *uuid = [[line substringFromIndex:[line rangeOfString:@"|[GAP]|"].location
 							   + [line rangeOfString:@"|[GAP]|"].length] stringByReplacingOccurrencesOfString:@"\t" withString:@""];
 			XcodeObject *dictionary = [XcodeObject objectWithName:name uuid:uuid];
@@ -172,29 +199,33 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 		}
 	}
 }
-- (void)parseXcodeProject 	{ NSLog(@"Parsing project at path: %@", self.filePath);
+- (void)parseXcodeProject {
+    NSLog(@"Parsing project at path: %@", self.filePath);
 
 	// Clean up
 	self.i = 0;
-	self.files 						= NSMutableArray.new;
-	self.dataString 				= @"".mutableCopy;
-	NSString *path 				= self.filePath;
-	NSString *projectFilePath 	= self.isDropbox ? path : [path stringByAppendingFormat:@"/project.pbxproj"];
-	self.sourceData 				= [[NSDictionary dictionaryWithContentsOfURL:[NSURL fileURLWithPath:projectFilePath]]mutableCopy];
-	//	NSLog(@"sourceData: %@", _sourceData);
-	NSDictionary *objects 	= _sourceData[@"objects"];
-	self.rootObjectUUID 		= _sourceData[@"rootObject"];
-	self.rootObject 			= objects[self.rootObjectUUID];
-	self.mainGroupUUID 		= _rootObject[@"mainGroup"];
-	self.mainGroup 			= objects[self.mainGroupUUID];
-	NSArray *children 		= _mainGroup[@"children"];
-	if (children) [self enumerateChildrenWithObjects:children andMainData:objects];
+	self.files = NSMutableArray.new;
+	self.dataString = @"".mutableCopy;
+	NSString *path = self.filePath;
+	NSString *projectFilePath = self.isDropbox ? path : [path stringByAppendingFormat:@"/project.pbxproj"];
+	self.sourceData = [[NSDictionary dictionaryWithContentsOfURL:[NSURL fileURLWithPath:projectFilePath]]mutableCopy];
+	//NSLog(@"sourceData: %@", _sourceData);
+	NSDictionary *objects = _sourceData[@"objects"];
+	self.rootObjectUUID = _sourceData[@"rootObject"];
+	self.rootObject = objects[self.rootObjectUUID];
+	self.mainGroupUUID = _rootObject[@"mainGroup"];
+	self.mainGroup = objects[self.mainGroupUUID];
+	NSArray *children = _mainGroup[@"children"];
+	if (children) {
+        [self enumerateChildrenWithObjects:children andMainData:objects];
+    }
+    
 	[self parseIt];
 }
 
 #pragma mark - Addding and Removing items
 
-- (void)removeItemWithUUID:		(NSString*)uuid {
+- (void)removeItemWithUUID:(NSString*)uuid {
 
 	NSMutableDictionary *newData = self.sourceData;
 
@@ -218,7 +249,8 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 	NSString *projectFilePath = [self.filePath stringByAppendingFormat:@"/project.pbxproj"];
 	[stringToWrite writeToFile:projectFilePath atomically:YES encoding:NSASCIIStringEncoding error:NULL];
 }
-- (BOOL)addGroupWithTitle:			(NSString*)title 			  toItemWithUUID:(NSString*)parentUUID 		{
+
+- (BOOL)addGroupWithTitle:(NSString*)title toItemWithUUID:(NSString*)parentUUID 		{
 	/* If parentUUID == nil, item will be added to root group. */
 	// PRE-LIMINARY CHECK -- Make sure parent item is a PBXGroup and NOT a file
 	NSDictionary *objects = self.sourceData[@"objects"];
@@ -233,6 +265,7 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 	NSString *sourceTree = @"<group>"; // Same for all items and groups
 
 	NSDictionary *newGroup = @{@"isa": _isa, @"name": name, @"sourceTree": sourceTree, @"children": children};
+    
 	_sourceData[@"objects"][uuid] = newGroup;
 	// Add new group to parent group
 	parentUUID = parentUUID ?: self.mainGroupUUID;
@@ -248,7 +281,8 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 	[stringToWrite writeToFile:projectFilePath atomically:YES encoding:NSASCIIStringEncoding error:NULL];
 	return YES;
 }
-- (BOOL)addFileWithRelativePath:	(NSString*)relPath asChildToItemWithUUID:(NSString*)parentItemUUID 	{
+
+- (BOOL)addFileWithRelativePath: (NSString*)relPath asChildToItemWithUUID:(NSString*)parentItemUUID 	{
 
 	// If parentUUID == nil, item will be added to root group. Returns successful or not.
 	// PRE-LIMINARY CHECK -- Make sure parent item is a PBXGroup and NOT a file
@@ -651,7 +685,7 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 
 #pragma mark - Retrieving Data
 
--      (NSArray*) uuidsOfChildrenOfItemWithUUID: (NSString*)uuid {
+- (NSArray*) uuidsOfChildrenOfItemWithUUID: (NSString*)uuid {
 
 	if (!_sourceData) // Data not parsed, make sure you call parseXcodeProject before using this or any other method
 		return nil;
@@ -667,24 +701,37 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 
 	return children;
 }
--    (NSUInteger) numberOfChildrenOfItemWithUUID:(NSString*)uuid {
+
+-  (NSUInteger) numberOfChildrenOfItemWithUUID:(NSString*)uuid {
 	NSArray *children = [self uuidsOfChildrenOfItemWithUUID:uuid];
 	return children.count;
 }
-- (XcodeObject*) itemWithUUID:						 (NSString*)uuid {
+- (XcodeObject*) itemWithUUID:(NSString*)uuid {
 	if (!_sourceData) // Data not parsed, make sure you call parseXcodeProject before using this or any other method
 		return nil;
 
 	XcodeObject *objects = _sourceData[@"objects"];
 	return objects[uuid] ?: nil; // Item doesn't exist. Incorrect uuid.
 }
--     (NSString*) nameOfItemWithUUID:				 (NSString*)uuid {
+
+- (NSDictionary*) itemWithUUIDAsNSDictionary:(NSString *)uuid
+{
+    if (!_sourceData) // Data not parsed, make sure you call parseXcodeProject before using this or any other method
+		return nil;
+    
+	NSDictionary *objects = _sourceData[@"objects"];
+	return objects[uuid] ?: nil; // Item doesn't exist. Incorrect uuid.
+}
+
+
+- (NSString*) nameOfItemWithUUID:(NSString*)uuid {
 
 	return [self itemWithUUID:uuid][@"name"] ?: [self itemWithUUID:uuid][@"path"] != nil
-														  ? [[self itemWithUUID:uuid][@"path"] lastPathComponent] : nil;
+			? [[self itemWithUUID:uuid][@"path"] lastPathComponent] : nil;
 }
-//- (NSDictionary*) parentOfItemWithUUID:			 (NSString*)uuid {
-- (XcodeObject*) parentOfItemWithUUID:			 (NSString*)uuid {
+
+//- (NSDictionary*) parentOfItemWithUUID:(NSString*)uuid {
+- (XcodeObject*) parentOfItemWithUUID:(NSString*)uuid {
 	NSDictionary *objects = self.sourceData[@"objects"];
 
 	for (NSString *element in objects) {
@@ -693,6 +740,7 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 		NSArray *children = [item valueForKey:@"children"];
 		if (!children)
 			continue;
+        
 		if ([children containsObject:uuid]) {
 //			NSMutableDictionary *customItem = [item mutableCopy];
 			XcodeObject *customItem = [item mutableCopy];
@@ -752,7 +800,7 @@ NSString* getRandomStringWithLengthAlpha(int len, BOOL alphaNumeric) { 	NSMutabl
 
 static int timeout = 5,  currentNum = 0;
 
--      (BOOL) exportFilesFromProjectIntoFolderAtPath:		(NSString*)destinationPath		 	{
+- (BOOL) exportFilesFromProjectIntoFolderAtPath:(NSString*)destinationPath		 	{
 	// Set up some variables
 	NSDictionary *objects = [self.sourceData valueForKey:@"objects"];
 	BOOL delegateRespondsToStatusChanged = [self.exportDelegate respondsToSelector:@selector(statusChangedTo:withFile:)];
